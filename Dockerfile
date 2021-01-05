@@ -1,6 +1,6 @@
 # VERSION 0.1
 FROM alpine:3.7
-ARG VERSION=3.13
+ARG VERSION=3.7
 ARG FOLDER_NAME=fio-fio-"$VERSION"
 
 # Install build deps + permanent dep: libaio
@@ -14,7 +14,7 @@ RUN apk --no-cache add \
         libaio && \
     git clone https://github.com/axboe/fio && \
     cd fio && \
-    git checkout fio-3.7 && \
+    git checkout fio-"$VERSION" && \
     ./configure && \
     make -j`nproc` && \
     make install && \
