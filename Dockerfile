@@ -1,6 +1,6 @@
 # VERSION 0.1
 FROM alpine:3.7
-ARG VERSION=3.7
+ARG VERSION=3.13
 ARG FOLDER_NAME=fio-fio-"$VERSION"
 
 # Install build deps + permanent dep: libaio
