@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fio-pvc-1
+spec:
+  storageClassName: wuke
+  volumeMode: Block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: fio-1
+  labels:
+    app: fio-1
+spec:
+  containers:
+    - name: fio-1
+      securityContext:
+        privileged: true
+      image: uklab/fio:3.7
+      imagePullPolicy: IfNotPresent
+      # 最新的 container 不需要使用 这个 command，默认会打开 server 模式
+      # command: ["fio","--server"]
+      ports:
+        - containerPort: 8765
+          hostPort: 8765
+          protocol: TCP
+      volumeDevices:
+        - name: fio-disk
+          devicePath: /mnt/fio
+  volumes:
+    - name: fio-disk
+      persistentVolumeClaim:
+         claimName: fio-pvc-1
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - k8s-n1
