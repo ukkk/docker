@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fio-pvc-1
 spec:
-  storageClassName: wuke
+  storageClassName: uklab
   volumeMode: Block
   accessModes:
   - ReadWriteOnce
