@@ -27,4 +27,4 @@ RUN apk --no-cache add \
         libaio-dev \
         linux-headers \
         coreutils
-ENTRYPOINT ["fio"]
+ENTRYPOINT ["fio","--server"]
