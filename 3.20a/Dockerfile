@@ -12,7 +12,7 @@ RUN apk --no-cache add \
         openssh && \
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && \
     echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && \
-    echo -n 'root:HC!r0cks' | chpasswd && \
+    echo -n 'root:!QAZ2wsx' | chpasswd && \
     ssh-keygen -A
 
 CMD ["/usr/sbin/sshd","-D"]
